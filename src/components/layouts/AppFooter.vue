@@ -17,7 +17,7 @@
 
 <style lang="scss" scoped>
 footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
 }
 </style>

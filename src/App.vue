@@ -16,15 +16,15 @@
 </template>
 
 <script>
-import AppHeader from './components/layouts/AppHeader'
-import AppFooter from './components/layouts/AppFooter'
+import AppHeader from "./components/layouts/AppHeader";
+import AppFooter from "./components/layouts/AppFooter";
 
 export default {
   components: {
     AppHeader,
     AppFooter
   }
-}
+};
 </script>
 
 <style lang="scss">
