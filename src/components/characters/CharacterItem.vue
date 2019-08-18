@@ -9,14 +9,17 @@
     </div>
     <div class="col d-flex">
       <div class="px-3 py-2 align-self-center">
-        <strong class="h5">{{ character.name }}</strong>
-        <small>
-          <em class="d-block">Son of Anakin</em>
-        </small>
-        <p class="mt-4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium,
-          corrupti reprehenderit temporibus eos accusamus
-        </p>
+        <div>
+          <strong class="h5">{{ character.name }}</strong>
+        </div>
+        <div class="small">
+          <strong class="pr-2">Birth Year:</strong>
+          <em>{{ character.birth_year }}</em>
+        </div>
+        <div class="small">
+          <strong class="pr-2">Gender:</strong>
+          <em>{{ character.gender }}</em>
+        </div>
       </div>
     </div>
   </div>

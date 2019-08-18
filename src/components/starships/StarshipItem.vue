@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3">
+  <div class="mb-4">
     <img
       :src="require(`../../assets/images/${starship.imageUrl}`)"
       style="width:100%; height:250px;"
@@ -8,12 +8,16 @@
     <div class="info-wrapper">
       <div class="info-inner p-2">
         <strong class="h5">{{ starship.name }}</strong>
-        <p class="pt-2 small">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium,
-          corrupti reprehenderit temporibus eos accusamus
-        </p>
+        <div class="small pt-2 pb-2">
+          <strong class="pr-2">Model:</strong>
+          <em>{{ starship.model }}</em>
+        </div>
+        <div class="small pb-3">
+          <strong class="pr-2">Cargo capacity:</strong>
+          <em>{{ starship.cargo_capacity }}</em>
+        </div>
         <div class="d-flex justify-content-end">
-          <button class="btn btn-secondary mr-1">
+          <button class="btn btn-secondary btn-sm mr-1">
             Read more
             <i class="fas fa-arrow-right small pl-1"></i>
           </button>

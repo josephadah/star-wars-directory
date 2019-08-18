@@ -1,11 +1,21 @@
 <template>
-  <div class="mt-3">
+  <div class="mt-4">
     <img
       :src="require(`../../assets/images/${planet.imageUrl}`)"
       style="width: 100%;"
       :alt="planet.name"
     />
-    <span class="planet-name text-center pt-4">{{ planet.name }}</span>
+    <div class="planet-name text-center pt-4 pb-2">
+      <p class="h3 pb-0 mb-0">{{ planet.name }}</p>
+      <span class="small pr-2">
+        <strong>Climate:</strong>
+        {{ planet.climate }}
+      </span> |
+      <span class="small pl-2">
+        <strong>Population:</strong>
+        {{ planet.population }}
+      </span>
+    </div>
   </div>
 </template>
 
@@ -28,7 +38,7 @@ export default {
     rgba(0, 0, 0, 1) 40%
   );
   color: #f1f1f1;
-  font-size: 1.75rem;
+  /* font-size: 1.75rem; */
   left: 0;
   right: 0;
   margin-left: auto;

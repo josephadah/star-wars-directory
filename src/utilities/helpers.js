@@ -1,13 +1,11 @@
 export const addImages = (objectArray, imageName, max) => {
-  objectArray.map((obj, index) => {
-    let imageNumber = 1;
-    const sequence = index + 1;
-    if (sequence <= max) {
-      imageNumber = sequence;
-    } else if (sequence > max) {
-      imageNumber = sequence - max;
-    }
+  let imageNumber = 1;
+  objectArray.map(obj => {
     obj.imageUrl = `${imageName}-${imageNumber}.jpg`;
+    imageNumber++;
+    if (imageNumber > max) {
+      imageNumber = 1;
+    }
   });
   return objectArray;
 };
