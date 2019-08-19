@@ -18,6 +18,6 @@
 <style lang="scss" scoped>
 footer {
   position: relative;
-  bottom: 0;
+  bottom: -1em;
 }
 </style>

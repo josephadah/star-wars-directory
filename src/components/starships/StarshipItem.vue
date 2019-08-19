@@ -35,7 +35,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .info-wrapper {
   background-color: #ddd;
   padding-left: 7px;

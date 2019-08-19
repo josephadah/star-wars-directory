@@ -11,7 +11,8 @@
             <StarshipItem :starship="starship" />
           </div>
         </div>
-        <slot></slot>
+        <ListItemLoader v-if="starships.length < 1" :columnsCount="3" />
+        <slot v-if="starships.length > 0"></slot>
         <Pagination
           v-if="!showFew && totalCount > pageSize"
           :totalCount="totalCount"
@@ -29,12 +30,14 @@ import { getStarships } from "@/services/swapi.service";
 import { addImages } from "@/utilities/helpers";
 import StarshipItem from "@/components/starships/StarshipItem";
 import Pagination from "@/components/common/Pagination";
+import ListItemLoader from "@/components/common/ListItemLoader";
 
 export default {
   name: "StarshipList",
   components: {
     StarshipItem,
-    Pagination
+    Pagination,
+    ListItemLoader
   },
   props: {
     showFew: Boolean

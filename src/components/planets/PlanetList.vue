@@ -11,7 +11,8 @@
             <PlanetItem :planet="planet" />
           </div>
         </div>
-        <slot></slot>
+        <ListItemLoader v-if="planets.length < 1" :columnsCount="3" />
+        <slot v-if="planets.length > 0"></slot>
         <Pagination
           class="mt-2"
           v-if="!showFew && totalCount > pageSize"
@@ -30,12 +31,14 @@ import { getPlanets } from "@/services/swapi.service";
 import { addImages } from "@/utilities/helpers";
 import PlanetItem from "@/components/planets/PlanetItem";
 import Pagination from "@/components/common/Pagination";
+import ListItemLoader from "@/components/common/ListItemLoader";
 
 export default {
   name: "PlanetList",
   components: {
     PlanetItem,
-    Pagination
+    Pagination,
+    ListItemLoader
   },
   props: {
     showFew: Boolean

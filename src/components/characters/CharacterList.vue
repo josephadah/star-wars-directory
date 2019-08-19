@@ -11,7 +11,8 @@
             <CharacterItem :character="character" />
           </div>
         </div>
-        <slot></slot>
+        <ListItemLoader v-if="characters.length < 1" :columnsCount="2" />
+        <slot v-if="characters.length > 0"></slot>
         <Pagination
           v-if="!showFew && totalCount > pageSize"
           :totalCount="totalCount"
@@ -29,12 +30,14 @@ import { getCharacters } from "@/services/swapi.service";
 import { addImages } from "@/utilities/helpers";
 import CharacterItem from "@/components/characters/CharacterItem";
 import Pagination from "@/components/common/Pagination";
+import ListItemLoader from "@/components/common/ListItemLoader";
 
 export default {
   name: "CharacterList",
   components: {
     CharacterItem,
-    Pagination
+    Pagination,
+    ListItemLoader
   },
   data() {
     return {
@@ -60,7 +63,7 @@ export default {
       getCharacters(page).then(data => {
         const characters = data.results;
         this.currentPage = page;
-        this.characters = addImages(characters, "planet", 3);
+        this.characters = addImages(characters, "character", 4);
       });
     }
   }
