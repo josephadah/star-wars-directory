@@ -1,8 +1,9 @@
 <template>
-  <div class="mb-4">
+  <div class="mb-4 transform-scale" @click="gotoDetailsPage">
     <img
       :src="require(`../../assets/images/${starship.imageUrl}`)"
-      style="width:100%; height:250px;"
+      class="w-100 cursor-pointer"
+      style="height:250px;"
       :alt="starship.name"
     />
     <div class="info-wrapper">
@@ -31,6 +32,16 @@
 export default {
   props: {
     starship: Object
+  },
+  methods: {
+    gotoDetailsPage() {
+      const url = this.starship.url;
+      const tempArr = url.split("/");
+      const id = Number(tempArr[5]);
+      if (!Number.isNaN(id)) {
+        this.$router.push(`/starships/${id}`);
+      }
+    }
   }
 };
 </script>

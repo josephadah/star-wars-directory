@@ -1,9 +1,10 @@
 <template>
-  <div style="background-color: #eee;" class="row no-gutters mb-4">
+  <div style="background-color: #eee;" class="row no-gutters mb-4 transform-scale">
     <div class="col-md-7">
       <img
         :src="require(`../../assets/images/${character.imageUrl}`)"
-        style="width: 100%; height: 250px;"
+        class="w-100 cursor-pointer"
+        style="height: 250px;"
         :alt="character.name"
       />
     </div>

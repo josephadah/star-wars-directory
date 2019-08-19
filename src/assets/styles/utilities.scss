@@ -2,6 +2,11 @@
   cursor: pointer;
 }
 
+.transform-scale:hover {
+  transform: scale(1.05);
+}
+
+// loader styles
 .loader-wrapper {
   width: 100%;
   position: relative;

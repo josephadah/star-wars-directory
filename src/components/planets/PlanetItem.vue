@@ -1,8 +1,8 @@
 <template>
-  <div class="mt-4">
+  <div class="mt-4 transform-scale">
     <img
       :src="require(`../../assets/images/${planet.imageUrl}`)"
-      style="width: 100%;"
+      class="w-100 cursor-pointer"
       :alt="planet.name"
     />
     <div class="planet-name text-center pt-4 pb-2">

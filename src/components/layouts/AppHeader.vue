@@ -1,5 +1,8 @@
 <template>
-  <header class="container-fluid">
+  <header
+    class="container-fluid"
+    :style="{backgroundImage: 'url(' + require(`../../assets/images/${headerImage}`) + ')'}"
+  >
     <nav class="navbar">
       <router-link class="navbar-brand" to="/">
         <img src="../../assets/images/logo.png" width="100" alt />
@@ -38,10 +41,20 @@
   </header>
 </template>
 
+<script>
+import { mapState } from "vuex";
+
+export default {
+  computed: {
+    ...mapState(["headerImage"])
+  }
+};
+</script>
+
 <style lang="scss" scoped>
 header {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../../assets/images/hero-banner.jpg");
+  // background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  //   url("../../assets/images/hero-banner.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
