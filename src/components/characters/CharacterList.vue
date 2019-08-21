@@ -4,7 +4,19 @@
       <div v-if="showTitle">
         <p class="h2 font-weight-bold text-center text-muted mt-4">Popular Characters</p>
         <div style="border-bottom: 5px solid #555; max-width: 150px;" class="mx-auto"></div>
-        <div></div>
+        <div v-if="!showFew" class="m-3">
+          <form class="form-inline">
+            <div class="form-group col-md-6">
+              <label for="gender" class="pr-3 h4">Filter</label>
+              <select v-model="gender" id="gender" name="gender" class="form-control">
+                <option :value="''" selected>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="n/a">Robot</option>
+              </select>
+            </div>
+          </form>
+        </div>
       </div>
       <div class="mt-3 mb-5">
         <div class="row justify-content-center">
@@ -46,10 +58,12 @@ export default {
   data() {
     return {
       characters: [],
+      gender: "",
       totalCount: 0,
       pageSize: 1,
       currentPage: 1,
-      isLoading: false
+      isLoading: false,
+      initialchars: []
     };
   },
   props: {
@@ -64,6 +78,16 @@ export default {
   watch: {
     query() {
       this.fetchCharacters(this.query);
+    },
+    gender() {
+      if (this.gender) {
+        this.characters = this.initialchars.filter(
+          character => character.gender === this.gender
+        );
+        this.totalCount = this.characters.length;
+      } else {
+        this.characters = [...this.initialchars];
+      }
     }
   },
   computed: {
@@ -85,6 +109,7 @@ export default {
         this.totalCount = data.count;
         this.pageSize = data.results.length;
         this.characters = addImages(characters, "character", 4);
+        this.initialchars = [...this.characters];
         this.isLoading = false;
       });
     },
@@ -95,6 +120,7 @@ export default {
         const characters = data.results;
         this.currentPage = page;
         this.characters = addImages(characters, "character", 4);
+        this.initialchars = [...this.characters];
         this.isLoading = false;
       });
     }

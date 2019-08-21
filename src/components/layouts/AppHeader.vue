@@ -4,9 +4,9 @@
     :style="{backgroundImage: 'url(' + require(`../../assets/images/${headerImage}`) + ')'}"
   >
     <nav class="navbar">
-      <a class="navbar-brand overlay-light p-2 cursor-pointer" href="/">
+      <router-link class="navbar-brand overlay-light p-2 cursor-pointer" to="/">
         <img src="../../assets/images/logo.png" width="100" alt />
-      </a>
+      </router-link>
       <router-link class="nav-link text-white p-2 overlay-light" to="/about">About</router-link>
     </nav>
   </header>
