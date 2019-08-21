@@ -10,8 +10,11 @@
           <div v-for="starship in starships" :key="starship.name" class="col-md-4">
             <StarshipItem :starship="starship" />
           </div>
+          <div v-if="!isLoading && starships.length < 1">
+            <p class="h4 pt-3 pb-5 text-danger">No results found</p>
+          </div>
         </div>
-        <ListItemLoader v-if="starships.length < 1" :columnsCount="3" />
+        <ListItemLoader v-if="isLoading" :columnsCount="3" />
         <slot v-if="starships.length > 0"></slot>
         <Pagination
           v-if="!showFew && totalCount > pageSize"
@@ -42,41 +45,56 @@ export default {
   props: {
     showingNumber: Number,
     exceptName: String,
-    showTitle: Boolean
+    showTitle: Boolean,
+    query: String
   },
   data() {
     return {
       starships: [],
       totalCount: 0,
       pageSize: 1,
-      currentPage: 1
+      currentPage: 1,
+      isLoading: false
     };
   },
   mounted() {
-    getStarships().then(data => {
-      let starships = data.results;
-      if (this.exceptName) {
-        starships = starships.filter(x => x.name !== this.exceptName);
-      }
-      if (this.showFew) {
-        starships = starships.slice(0, this.showingNumber);
-      }
-      this.totalCount = data.count;
-      this.pageSize = data.results.length;
-      this.starships = addImages(starships, "starship", 6);
-    });
+    this.fetchStarships();
   },
   computed: {
     showFew() {
       return Number.isInteger(this.showingNumber);
     }
   },
+  watch: {
+    query() {
+      this.fetchStarships(this.query);
+    }
+  },
   methods: {
+    fetchStarships(query) {
+      this.isLoading = true;
+      getStarships(1, query).then(data => {
+        let starships = data.results;
+        if (this.exceptName) {
+          starships = starships.filter(x => x.name !== this.exceptName);
+        }
+        if (this.showFew) {
+          starships = starships.slice(0, this.showingNumber);
+        }
+        this.totalCount = data.count;
+        this.pageSize = data.results.length;
+        this.starships = addImages(starships, "starship", 6);
+        this.isLoading = false;
+      });
+    },
     pageChange(page) {
+      this.starships.length = 0;
+      this.isLoading = true;
       getStarships(page).then(data => {
         const starships = data.results;
         this.currentPage = page;
         this.starships = addImages(starships, "starship", 6);
+        this.isLoading = false;
       });
     }
   }

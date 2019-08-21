@@ -1,12 +1,13 @@
 <template>
   <div>
-    <StarshipList :showingNumber="6" :showTitle="true">
+    <SearchForm @search-items="search" />
+    <StarshipList :showingNumber="6" :showTitle="true" :query="query">
       <LoadMore path="/starships" />
     </StarshipList>
-    <PlanetList :showingNumber="3" :showTitle="true">
+    <PlanetList :showingNumber="3" :showTitle="true" :query="query">
       <LoadMore path="/planets" />
     </PlanetList>
-    <CharacterList :showingNumber="4" :showTitle="true">
+    <CharacterList :showingNumber="4" :showTitle="true" :query="query">
       <LoadMore path="/characters" />
     </CharacterList>
   </div>
@@ -18,6 +19,7 @@ import StarshipList from "@/components/starships/StarshipList";
 import PlanetList from "@/components/planets/PlanetList";
 import CharacterList from "@/components/characters/CharacterList";
 import LoadMore from "@/components/common/LoadMore";
+import SearchForm from "@/components/common/SearchForm";
 
 export default {
   name: "home",
@@ -25,7 +27,18 @@ export default {
     StarshipList,
     PlanetList,
     CharacterList,
-    LoadMore
+    LoadMore,
+    SearchForm
+  },
+  data() {
+    return {
+      query: ""
+    };
+  },
+  methods: {
+    search(query) {
+      this.query = query;
+    }
   }
 };
 </script>

@@ -4,49 +4,35 @@
     :style="{backgroundImage: 'url(' + require(`../../assets/images/${headerImage}`) + ')'}"
   >
     <nav class="navbar">
-      <router-link class="navbar-brand p-2" to="/">
+      <a class="navbar-brand overlay-light p-2 cursor-pointer" href="/">
         <img src="../../assets/images/logo.png" width="100" alt />
-      </router-link>
-      <router-link class="nav-link text-white" to="/about">About</router-link>
+      </a>
+      <router-link class="nav-link text-white p-2 overlay-light" to="/about">About</router-link>
     </nav>
-
-    <div v-if="showSearch" class="row justify-content-center mt-5">
-      <div class="col-12 col-md-6 text-center hero-overlay">
-        <div class="d-inline-flex align-items-center pb-1 hero-heading">
-          <img src="../../assets/images/logo.png" width="100" alt />
-          <span class="h2 font-weight-bolder pl-3 text-white">Directory</span>
-        </div>
-        <p
-          class="h5 text-light mt-4"
-        >Find your favorite Characters, Films, Species, Starships, and Planets</p>
-        <form class="mt-4">
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  <i class="fas fa-search fa-2x pl-4 pr-3"></i>
-                </div>
-              </div>
-              <input
-                type="text"
-                class="form-control form-control-lg"
-                id="inlineFormInputGroupUsername"
-                placeholder="Enter a search term"
-              />
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
   </header>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
+  data() {
+    return {
+      query: ""
+    };
+  },
   computed: {
     ...mapState(["headerImage", "showSearch"])
+  },
+  methods: {
+    ...mapMutations(["CHANGE_SEARCH_QUERY"]),
+    search() {
+      const searchQuery = this.query.trim().toLowerCase();
+      if (searchQuery) {
+        this.CHANGE_SEARCH_QUERY(searchQuery);
+        this.query = "";
+      }
+    }
   }
 };
 </script>
@@ -59,16 +45,8 @@ header {
   position: relative;
   height: 450px;
 
-  .navbar-brand {
+  .overlay-light {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3));
-  }
-
-  .hero-heading {
-    border-bottom: 2px solid #fff;
-  }
-
-  .hero-overlay {
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5) 20%);
   }
 }
 </style>
