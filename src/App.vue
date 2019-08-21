@@ -1,15 +1,8 @@
 <template>
-  <!-- <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>-->
   <div>
     <AppHeader />
     <main class="container">
-      <router-view />
+      <router-view :key="$route.fullPath" />
     </main>
     <AppFooter />
   </div>

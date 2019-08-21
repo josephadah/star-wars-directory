@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div>
+      <div v-if="showTitle">
         <p class="h2 font-weight-bold text-center text-muted mt-4">Popular Starships</p>
         <div style="border-bottom: 5px solid #555; max-width: 150px;" class="mx-auto"></div>
       </div>
@@ -40,7 +40,9 @@ export default {
     ListItemLoader
   },
   props: {
-    showFew: Boolean
+    showingNumber: Number,
+    exceptName: String,
+    showTitle: Boolean
   },
   data() {
     return {
@@ -52,11 +54,22 @@ export default {
   },
   mounted() {
     getStarships().then(data => {
-      const starships = this.showFew ? data.results.slice(0, 6) : data.results;
+      let starships = data.results;
+      if (this.exceptName) {
+        starships = starships.filter(x => x.name !== this.exceptName);
+      }
+      if (this.showFew) {
+        starships = starships.slice(0, this.showingNumber);
+      }
       this.totalCount = data.count;
-      this.pageSize = starships.length;
+      this.pageSize = data.results.length;
       this.starships = addImages(starships, "starship", 6);
     });
+  },
+  computed: {
+    showFew() {
+      return Number.isInteger(this.showingNumber);
+    }
   },
   methods: {
     pageChange(page) {

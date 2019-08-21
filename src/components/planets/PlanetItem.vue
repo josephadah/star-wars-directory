@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-4 transform-scale">
+  <div class="mt-4 transform-scale" @click="gotoDetailsPage">
     <img
       :src="require(`../../assets/images/${planet.imageUrl}`)"
       class="w-100 cursor-pointer"
@@ -23,6 +23,16 @@
 export default {
   props: {
     planet: Object
+  },
+  methods: {
+    gotoDetailsPage() {
+      const url = this.planet.url;
+      const tempArr = url.split("/");
+      const id = Number(tempArr[5]);
+      if (!Number.isNaN(id)) {
+        this.$router.push(`/planets/${id}`);
+      }
+    }
   }
 };
 </script>

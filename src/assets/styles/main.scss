@@ -1,2 +1,25 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "./utilities.scss";
+
+.floating-title {
+  position: absolute;
+  top: -9em;
+  left: -2em;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3));
+
+  .left-block,
+  .right-block {
+    width: 20px;
+    height: 30px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-top: 4px solid #fff;
+    border-bottom: 4px solid #fff;
+  }
+  .left-block {
+    border-left: 4px solid #fff;
+  }
+  .right-block {
+    border-right: 4px solid #fff;
+  }
+}

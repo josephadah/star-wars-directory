@@ -1,5 +1,9 @@
 <template>
-  <div style="background-color: #eee;" class="row no-gutters mb-4 transform-scale">
+  <div
+    style="background-color: #eee;"
+    class="row no-gutters mb-4 transform-scale"
+    @click="gotoDetailsPage"
+  >
     <div class="col-md-7">
       <img
         :src="require(`../../assets/images/${character.imageUrl}`)"
@@ -30,6 +34,16 @@
 export default {
   props: {
     character: Object
+  },
+  methods: {
+    gotoDetailsPage() {
+      const url = this.character.url;
+      const tempArr = url.split("/");
+      const id = Number(tempArr[5]);
+      if (!Number.isNaN(id)) {
+        this.$router.push(`/characters/${id}`);
+      }
+    }
   }
 };
 </script>

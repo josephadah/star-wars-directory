@@ -4,13 +4,13 @@
     :style="{backgroundImage: 'url(' + require(`../../assets/images/${headerImage}`) + ')'}"
   >
     <nav class="navbar">
-      <router-link class="navbar-brand" to="/">
+      <router-link class="navbar-brand p-2" to="/">
         <img src="../../assets/images/logo.png" width="100" alt />
       </router-link>
       <router-link class="nav-link text-white" to="/about">About</router-link>
     </nav>
 
-    <div class="row justify-content-center mt-5">
+    <div v-if="showSearch" class="row justify-content-center mt-5">
       <div class="col-12 col-md-6 text-center hero-overlay">
         <div class="d-inline-flex align-items-center pb-1 hero-heading">
           <img src="../../assets/images/logo.png" width="100" alt />
@@ -46,20 +46,22 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["headerImage"])
+    ...mapState(["headerImage", "showSearch"])
   }
 };
 </script>
 
 <style lang="scss" scoped>
 header {
-  // background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-  //   url("../../assets/images/hero-banner.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   height: 450px;
+
+  .navbar-brand {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3));
+  }
 
   .hero-heading {
     border-bottom: 2px solid #fff;

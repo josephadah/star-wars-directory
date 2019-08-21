@@ -1,5 +1,5 @@
 <template>
-  <StarshipList />
+  <StarshipList :showTitle="true" />
 </template>
 
 <script>

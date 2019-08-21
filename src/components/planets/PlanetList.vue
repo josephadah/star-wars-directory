@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div>
+      <div v-if="showTitle">
         <p class="h2 font-weight-bold text-center text-muted mt-4">Popular Planets</p>
         <div style="border-bottom: 5px solid #555; max-width: 150px;" class="mx-auto"></div>
       </div>
@@ -41,7 +41,9 @@ export default {
     ListItemLoader
   },
   props: {
-    showFew: Boolean
+    showingNumber: Number,
+    exceptName: String,
+    showTitle: Boolean
   },
   data() {
     return {
@@ -53,11 +55,22 @@ export default {
   },
   mounted() {
     getPlanets().then(data => {
-      const planets = this.showFew ? data.results.slice(0, 3) : data.results;
-      this.planets = addImages(planets, "planet", 3);
+      let planets = data.results;
+      if (this.exceptName) {
+        planets = planets.filter(x => x.name !== this.exceptName);
+      }
+      if (this.showFew) {
+        planets = planets.slice(0, this.showingNumber);
+      }
       this.totalCount = data.count;
-      this.pageSize = planets.length;
+      this.pageSize = data.results.length;
+      this.planets = addImages(planets, "planet", 3);
     });
+  },
+  computed: {
+    showFew() {
+      return Number.isInteger(this.showingNumber);
+    }
   },
   methods: {
     pageChange(page) {

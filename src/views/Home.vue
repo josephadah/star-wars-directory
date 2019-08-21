@@ -1,12 +1,12 @@
 <template>
   <div>
-    <StarshipList :showFew="true">
+    <StarshipList :showingNumber="6" :showTitle="true">
       <LoadMore path="/starships" />
     </StarshipList>
-    <PlanetList :showFew="true">
+    <PlanetList :showingNumber="3" :showTitle="true">
       <LoadMore path="/planets" />
     </PlanetList>
-    <CharacterList :showFew="true">
+    <CharacterList :showingNumber="4" :showTitle="true">
       <LoadMore path="/characters" />
     </CharacterList>
   </div>

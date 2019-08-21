@@ -1,5 +1,5 @@
 <template>
-  <CharacterList />
+  <CharacterList :showTitle="true" />
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <PlanetList></PlanetList>
+  <PlanetList :showTitle="true" />
 </template>
 
 <script>

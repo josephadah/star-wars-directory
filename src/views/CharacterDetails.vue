@@ -1,54 +1,54 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <div v-if="starship" class="col-9 mt-4 mb-5 pb-5">
+      <div v-if="character" class="col-9 mt-4 mb-5 pb-5">
         <div class="d-inline-block">
           <div class="floating-title d-flex align-items-center p-3">
             <div class="left-block mr-4"></div>
-            <h3 class="text-white">{{ starship.name }}</h3>
+            <h3 class="text-white">{{ character.name }}</h3>
             <div class="right-block ml-4"></div>
           </div>
         </div>
-        <h3 class="mt-1 mb-4">{{ starship.name }}</h3>
+        <h3 class="mt-1 mb-4">{{ character.name }}</h3>
         <div>
           <div class="mb-2">
-            <strong class="pr-2">Model:</strong>
-            <em>{{ starship.model }}</em>
+            <strong class="pr-2">Gender:</strong>
+            <em>{{ character.gender }}</em>
           </div>
           <div class="mb-2">
-            <strong class="pr-2">Manufacturer:</strong>
-            <em>{{ starship.manufacturer }}</em>
+            <strong class="pr-2">Birth year:</strong>
+            <em>{{ character.birth_year }}</em>
           </div>
           <div class="mb-2">
-            <strong class="pr-2">Starship Class:</strong>
-            <em>{{ starship.starship_class }}</em>
+            <strong class="pr-2">Eye color:</strong>
+            <em>{{ character.eye_color }}</em>
           </div>
           <div class="mb-2">
-            <strong class="pr-2">Cargo Capacity:</strong>
-            <em>{{ starship.cargo_capacity }}</em>
+            <strong class="pr-2">Hair color:</strong>
+            <em>{{ character.hair_color }}</em>
           </div>
           <div class="mb-2">
-            <strong class="pr-2">Crew:</strong>
-            <em>{{ starship.crew }}</em>
+            <strong class="pr-2">Height:</strong>
+            <em>{{ character.height }}</em>
           </div>
           <div class="mb-2">
-            <strong class="pr-2">Passengers:</strong>
-            <em>{{ starship.passengers }}</em>
+            <strong class="pr-2">Mass:</strong>
+            <em>{{ character.mass }}</em>
           </div>
           <div class="mb-2">
-            <strong class="pr-2">Max Speed:</strong>
-            <em>{{ starship.max_atmosphering_speed }}</em>
+            <strong class="pr-2">Skin color:</strong>
+            <em>{{ character.skin_color }}</em>
           </div>
         </div>
       </div>
     </div>
-    <ItemDetailsLoader v-if="!starship" />
-    <div v-if="starship">
+    <ItemDetailsLoader :columnsCount="2" v-if="!character" />
+    <div v-if="character">
       <div class="text-center">
         <div class="border-bottom pb-2 mb-3">
-          <h3 class="pl-4 pr-4 pb-2 pt-2 border d-inline-block">Recently viewed Starships</h3>
+          <h3 class="pl-4 pr-4 pb-2 pt-2 border d-inline-block">Recently viewed Character</h3>
         </div>
-        <StarshipList :showingNumber="3" :exceptName="starship.name" :showTitle="false" />
+        <CharacterList :showingNumber="2" :exceptName="character.name" :showTitle="false" />
       </div>
     </div>
   </div>
@@ -56,29 +56,29 @@
 
 <script>
 import { mapMutations } from "vuex";
-import { getStarship } from "../services/swapi.service";
+import { getCharacter } from "../services/swapi.service";
 import ItemDetailsLoader from "../components/common/ItemDetailsLoader";
-import StarshipList from "../components/starships/StarshipList";
+import CharacterList from "../components/characters/CharacterList";
 
 export default {
   components: {
     ItemDetailsLoader,
-    StarshipList
+    CharacterList
   },
   data() {
     return {
-      starship: {},
+      character: {},
       imageUrl: ""
     };
   },
   mounted() {
     const id = this.$route.params.id;
     if (id) {
-      getStarship(id).then(data => {
-        this.starship = data;
-        const randomImageNumber = Math.floor(Math.random() * (6 - 2)) + 1;
-        this.imageUrl = this.starship
-          ? `starship-${randomImageNumber}.jpg`
+      getCharacter(id).then(data => {
+        this.character = data;
+        const randomImageNumber = Math.floor(Math.random() * (4 - 2)) + 1;
+        this.imageUrl = this.character
+          ? `character-${randomImageNumber}.jpg`
           : "";
         this.changeHeaderImage(this.imageUrl);
         this.toggleShowSearch(false);

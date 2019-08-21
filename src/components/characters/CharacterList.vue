@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div>
+      <div v-if="showTitle">
         <p class="h2 font-weight-bold text-center text-muted mt-4">Popular Characters</p>
         <div style="border-bottom: 5px solid #555; max-width: 150px;" class="mx-auto"></div>
       </div>
@@ -48,15 +48,28 @@ export default {
     };
   },
   props: {
-    showFew: Boolean
+    showingNumber: Number,
+    exceptName: String,
+    showTitle: Boolean
   },
   mounted() {
     getCharacters().then(data => {
-      const characters = this.showFew ? data.results.slice(0, 4) : data.results;
-      this.characters = addImages(characters, "character", 4);
+      let characters = data.results;
+      if (this.exceptName) {
+        characters = characters.filter(x => x.name !== this.exceptName);
+      }
+      if (this.showFew) {
+        characters = characters.slice(0, this.showingNumber);
+      }
       this.totalCount = data.count;
-      this.pageSize = characters.length;
+      this.pageSize = data.results.length;
+      this.characters = addImages(characters, "character", 4);
     });
+  },
+  computed: {
+    showFew() {
+      return Number.isInteger(this.showingNumber);
+    }
   },
   methods: {
     pageChange(page) {
