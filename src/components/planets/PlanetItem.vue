@@ -48,7 +48,6 @@ export default {
     rgba(0, 0, 0, 1) 40%
   );
   color: #f1f1f1;
-  /* font-size: 1.75rem; */
   left: 0;
   right: 0;
   margin-left: auto;

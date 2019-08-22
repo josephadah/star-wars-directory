@@ -13,26 +13,11 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState } from "vuex";
 
 export default {
-  data() {
-    return {
-      query: ""
-    };
-  },
   computed: {
-    ...mapState(["headerImage", "showSearch"])
-  },
-  methods: {
-    ...mapMutations(["CHANGE_SEARCH_QUERY"]),
-    search() {
-      const searchQuery = this.query.trim().toLowerCase();
-      if (searchQuery) {
-        this.CHANGE_SEARCH_QUERY(searchQuery);
-        this.query = "";
-      }
-    }
+    ...mapState(["headerImage"])
   }
 };
 </script>

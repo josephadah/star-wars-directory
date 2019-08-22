@@ -79,24 +79,19 @@ export default {
         const randomImageNumber = Math.floor(Math.random() * (3 - 2)) + 1;
         this.imageUrl = this.planet ? `planet-${randomImageNumber}.jpg` : "";
         this.changeHeaderImage(this.imageUrl);
-        this.toggleShowSearch(false);
       });
     }
   },
   methods: {
-    ...mapMutations(["CHANGE_HEADER_IMAGE", "TOGGLE_SHOW_SEARCH"]),
+    ...mapMutations(["CHANGE_HEADER_IMAGE"]),
     changeHeaderImage(url) {
       if (url) {
         this.CHANGE_HEADER_IMAGE(url);
       }
-    },
-    toggleShowSearch(value) {
-      this.TOGGLE_SHOW_SEARCH(value);
     }
   },
   beforeDestroy() {
     this.changeHeaderImage("hero-banner.jpg");
-    this.toggleShowSearch(true);
   }
 };
 </script>
